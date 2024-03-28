@@ -1,29 +1,28 @@
 {
-    "builds": [
-        {
-            "src": "chat_project/wsgi.py",
-            "use": "@vercel/python",
-            "config": {
-                "maxLambdaSize": "15mb",
-                "runtime": "python3.9"
-            }
-        },
-        {
-            "src": "build_files.sh",
-            "use": "@vercel/static-build",
-            "config": {
-                "distDir": "staticfiles_build"
-            }
-        }
-    ],
-    "routes": [
-        {
-            "src": "/static/(.*)",
-            "dest": "/static/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "chat_project/wsgi.py"
-        }
-    ]
+  "builds": [
+    {
+      "src": "chatbot_project/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "chatbot_project/wsgi.py"
+    }
+  ],
+  "functions": {
+    "api": {
+      "runtime": "vercel-python@0.24.0",
+      "memory": 1024
+    }
+  },
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "chatbot_project.settings",
+    "VERCEL_ENV": "production"
+  },
+  "version": 2
 }
