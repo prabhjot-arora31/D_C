@@ -44,10 +44,12 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000'
+    # 'https://django-chatbot2-f4ld.onrender.com',
+    '*'
     # 'http://localhost:8000/chat',
     # Add other origins as needed
 ]
-CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://127.0.0.1:8000']
+CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://127.0.0.1:8000' ,'https://django-chatbot2-f4ld.onrender.com/']
 CSRF_COOKIE_SECURE = False  # Set to False if not using HTTPS in development
 
 MIDDLEWARE = [
