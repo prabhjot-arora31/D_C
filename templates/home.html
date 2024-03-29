@@ -79,90 +79,154 @@
         </div>
     </div>
     <script>
-        const chat_logo = document.querySelector('.chat-logo')
-        const chat_main = document.querySelector('.chat-main')
-        chat_logo.addEventListener('click', () => {
-            chat_logo.style.display = 'none'
-            const chat_box = document.createElement('div')
-            chat_box.style.display = 'flex';
-            chat_box.style.flexDirection = 'column';
-            // chat_box.style.alignItems = 'center'
-            chat_box.style.width = '300px';
-            chat_box.style.height = '530px';
-            chat_box.style.border = '2px solid black'
-            chat_box.style.backgroundColor = 'white'
-            chat_box.style.position = 'relative';
-            const cross = document.createElement('h2');
-            cross.innerHTML = 'X';
-            cross.style.position = 'absolute'
-            cross.style.right = 0
-            cross.style.padding = '0.6rem 0.8rem'
-            cross.style.cursor = 'pointer'
-            cross.style.backgroundColor = 'black';
-            cross.style.color = 'white'
-            cross.addEventListener('click', () => {
-                chat_logo.style.display = 'flex'
-                chat_box.style.display = 'none'
+        document.addEventListener('DOMContentLoaded', function () {
+            const chat_logo = document.querySelector('.chat-logo')
+            const chat_main = document.querySelector('.chat-main')
+            chat_logo.addEventListener('click', () => {
+                chat_logo.style.display = 'none'
+                const chat_box = document.createElement('div')
+                chat_box.style.display = 'flex';
+                chat_box.style.flexDirection = 'column';
+                // chat_box.style.alignItems = 'center'
+                chat_box.style.width = '300px';
+                chat_box.style.height = '530px';
+                chat_box.style.border = '2px solid black'
+                chat_box.style.backgroundColor = 'white'
+                chat_box.style.position = 'relative';
+                const cross = document.createElement('h2');
+                cross.innerHTML = 'X';
+                cross.style.position = 'absolute'
+                cross.style.right = 0
+                cross.style.padding = '0.6rem 0.8rem'
+                cross.style.cursor = 'pointer'
+                cross.style.backgroundColor = 'black';
+                cross.style.color = 'white'
+                cross.addEventListener('click', () => {
+                    chat_logo.style.display = 'flex'
+                    chat_box.style.display = 'none'
+                })
+                const heading_chat = document.createElement('h1');
+                heading_chat.innerHTML = '<b>Chat-Bot</b>'
+                heading_chat.style.textAlign = 'center'
+                heading_chat.style.marginTop = '6px'
+                const footer = document.createElement('form')
+                footer.id = 'myForm'
+                footer.style.display = 'flex'
+                footer.style.justifyContent = 'center'
+                footer.style.position = 'absolute'
+                footer.style.bottom = '8px'
+                footer.style.margin = '0 auto'
+                footer.style.marginTop = '3px';
+                // footer.style.flex = 'auto'
+                footer.style.width = '100%'
+                // footer.method = 'POST';
+                // footer.action = 'http://127.0.0.1:8000/'
+                // csrf
+                function getCookie(name) {
+                    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                    return cookieValue ? cookieValue.pop() : '';
+                }
+                function scrollToBottom() {
+                    const chatContainer = document.getElementById('main_chats');
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }
+                // Retrieve CSRF token from cookie
+                const csrfToken = getCookie('csrftoken');
+                const csrfInput = document.createElement('input')
+                csrfInput.type = 'hidden'
+                csrfInput.name = 'csrfmiddlewaretoken'
+                csrfInput.value = '{{ csrf_token }}';
+                footer.appendChild(csrfInput)
+                // const csrfToken = document.querySelector('input[name="csrfmiddlewaretoken"]').value;
+                // const csrfToken = csrfInput.value;
+                // csrfInput.value = csrfToken;
+                // end csrf
+                const inputBox = document.createElement('input')
+                inputBox.type = 'text'
+                inputBox.placeholder = 'Enter your message....'
+                inputBox.name = 'message'
+                inputBox.style.border = '2px solid black'
+                inputBox.style.padding = '0.34rem'
+                const btn = document.createElement('button')
+                btn.innerText = 'Send'
+                btn.style.backgroundColor = 'rgb(149,69,58)'
+                btn.style.color = 'white'
+                btn.style.padding = '0.34rem'
+                const main_chats = document.createElement('div')
+                main_chats.style.marginTop = '13px'
+                main_chats.style.padding = '0.4rem'
+                main_chats.style.overflow = 'auto'
+                main_chats.style.paddingBottom = '3.5rem'
+                main_chats.id = 'main_chats'
+                // sending message
+                btn.addEventListener('click', async (e) => {
+                    e.preventDefault()
+                    const inputData = inputBox.value.trim();
+                    const p = document.createElement('p');
+                    p.innerText = inputData;
+                    p.style.marginLeft = 'auto';
+                    p.style.textAlign = 'center';
+                    p.style.padding = '8px 12px';
+                    p.style.border = '2px solid black';
+                    p.style.marginBottom = '7px';
+                    p.style.width = 'fit-content'
+                    p.style.maxWidth = '60%'; // Set maximum width to 60% of its container
+                    p.style.wordWrap = 'break-word';
+                    if (inputData.length === 0) {
+                        alert('please enter the message');
+                        e.preventDefault()
+                        return;
+                    }
+                    const formData = new FormData(document.getElementById('myForm'));
+                    const csrfToken = formData.get('csrfmiddlewaretoken');
+                    function getCookie(name) {
+                        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+                        return cookieValue ? cookieValue.pop() : '';
+                    }
+                    const csrfToken2 = getCookie('csrftoken')
+                    main_chats.appendChild(p);
+                    scrollToBottom()
+
+                    await fetch('http://localhost:8000', {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': csrfToken2
+                        },
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                            'message': inputData
+                        })
+                    }).then((data) => data.json()).then((rData) => {
+                        console.log(rData.message)
+                        const p = document.createElement('p');
+                        p.innerText = rData.message;
+                        p.style.marginRight = 'auto';
+                        p.style.marginLeft = '0'
+                        p.style.textAlign = 'center';
+                        p.style.padding = '8px 12px';
+                        p.style.border = '2px solid black';
+                        p.style.marginBottom = '7px';
+                        p.style.width = 'fit-content'
+                        p.style.maxWidth = '60%'; // Set maximum width to 60% of its container
+                        p.style.wordWrap = 'break-word';
+                        main_chats.appendChild(p)
+                        scrollToBottom()
+                    }).catch((er) => {
+                        alert(er.message)
+                    })
+                    inputBox.value = '';
+                });
+
+                // end sending message
+                footer.appendChild(inputBox)
+                footer.appendChild(btn)
+                chat_box.appendChild(cross)
+                chat_box.appendChild(heading_chat)
+                chat_box.appendChild(footer)
+                chat_box.appendChild(main_chats)
+                chat_main.appendChild(chat_box)
             })
-            const heading_chat = document.createElement('h1');
-            heading_chat.innerHTML = '<b>Chat-Bot</b>'
-            heading_chat.style.textAlign = 'center'
-            heading_chat.style.marginTop = '6px'
-            const footer = document.createElement('div')
-            footer.style.display = 'flex'
-            footer.style.justifyContent = 'center'
-            footer.style.position = 'absolute'
-            footer.style.bottom = '8px'
-            footer.style.margin = '0 auto'
-            footer.style.marginTop='3px';
-            // footer.style.flex = 'auto'
-            footer.style.width = '100%'
-            const inputBox = document.createElement('input')
-            inputBox.type = 'text'
-            inputBox.placeholder = 'Enter your message....'
-            inputBox.style.border = '2px solid black'
-            inputBox.style.padding = '0.34rem'
-            const btn = document.createElement('button')
-            btn.innerText = 'Send'
-            btn.style.backgroundColor = 'rgb(149,69,58)'
-            btn.style.color = 'white'
-            btn.style.padding = '0.34rem'
-            const main_chats = document.createElement('div')
-            main_chats.style.marginTop = '13px'
-            main_chats.style.padding = '0.4rem'
-            main_chats.style.overflow = 'auto'
-            main_chats.style.paddingBottom = '3.5rem'
-            // sending message
-            btn.addEventListener('click', () => {
-    const inputData = inputBox.value;
-    const p = document.createElement('p');
-    p.innerText = inputData;
-    p.style.marginLeft = 'auto';
-    p.style.textAlign = 'center';
-    p.style.padding = '8px 12px';
-    p.style.border = '2px solid black';
-    p.style.marginBottom = '7px';
-                p.style.width = 'fit-content'
-    p.style.maxWidth = '60%'; // Set maximum width to 60% of its container
-    p.style.wordWrap = 'break-word';
-
-    if (inputData.length === 0) {
-        alert('please enter the message');
-        return;
-    }
-
-    main_chats.appendChild(p);
-    inputBox.value = '';
-});
-
-            // end sending message
-            footer.appendChild(inputBox)
-            footer.appendChild(btn)
-            chat_box.appendChild(cross)
-            chat_box.appendChild(heading_chat)
-            chat_box.appendChild(footer)
-            chat_box.appendChild(main_chats)
-            chat_main.appendChild(chat_box)
         })
     </script>
 </body>

@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@4&t)li0p-kviqhd*rgk1rvx^@nfrtih5p_e#4mb*s)3$6gg57'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,10 +38,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chatbot'
+    'chatbot',
+    'corsheaders',
 ]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
+    # 'http://localhost:8000/chat',
+    # Add other origins as needed
+]
+CSRF_TRUSTED_ORIGINS = ['https://*.mydomain.com','http://127.0.0.1:8000']
+CSRF_COOKIE_SECURE = False  # Set to False if not using HTTPS in development
 
 MIDDLEWARE = [
+      'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

@@ -1,7 +1,19 @@
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
+# from django.http import HttpResponse
+from django.http import JsonResponse
 # Create your views here.
+@csrf_exempt 
 def chat(request):
-    return render(request,'home.html')
+        if request.method == 'POST':
+         message = request.POST.get('message')
+         print(message)
+         return JsonResponse({'message':'Hello...This is a simple message. The model is in a development phase. Every Time it will generate the same response for your query. Please wait for the full development of this Chat-Bot. Thanks...'})
+        elif request.method == 'GET':
+         return render(request,'home.html')
+        else:
+         print('Only POST method is allowed')
+         return JsonResponse({'message':'error'})
 def contact(request):
     return render(request,'contact.html')
