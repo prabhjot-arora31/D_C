@@ -168,14 +168,21 @@
                     e.preventDefault()
                     const inputData = inputBox.value.trim();
                     const p = document.createElement('p');
+                    const p2 = document.createElement('p')
+                    const div = document.createElement('div')
+                    div.appendChild(p)
+                    div.appendChild(p2)
+                    p2.innerHTML = '<h6 style="font-size:11px;background-color:lightblue;padding:0.3rem ; width:fit-content"><b>User</b></h6>'
                     p.innerText = inputData;
-                    p.style.marginLeft = 'auto';
-                    p.style.textAlign = 'center';
-                    p.style.padding = '8px 12px';
-                    p.style.border = '2px solid black';
+                    div.style.margin = '4px'
+                    div.style.marginRight = '0';
+                    div.style.marginLeft = 'auto'
+                    // p.style.textAlign = 'center';
+                    div.style.padding = '8px 12px';
+                    div.style.border = '2px solid black';
                     p.style.marginBottom = '7px';
-                    p.style.width = 'fit-content'
-                    p.style.maxWidth = '60%'; // Set maximum width to 60% of its container
+                    div.style.width = 'fit-content'
+                    div.style.maxWidth = '60%'; // Set maximum width to 60% of its container
                     p.style.wordWrap = 'break-word';
                     if (inputData.length === 0) {
                         alert('please enter the message');
@@ -189,10 +196,11 @@
                         return cookieValue ? cookieValue.pop() : '';
                     }
                     const csrfToken2 = getCookie('csrftoken')
-                    main_chats.appendChild(p);
+                    main_chats.appendChild(div);
                     scrollToBottom()
 
-                    await fetch('https://django-chatbot2-f4ld.onrender.com', {
+                    // await fetch('https://django-chatbot2-f4ld.onrender.com', {
+                    await fetch('http://127.0.0.1:8000', {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'X-CSRFToken': csrfToken2
@@ -205,17 +213,22 @@
                     }).then((data) => data.json()).then((rData) => {
                         console.log(rData.message)
                         const p = document.createElement('p');
+                        const p2 = document.createElement('p')
+                        const div = document.createElement('div')
+                        div.appendChild(p)
+                        div.appendChild(p2)
+                        p2.innerHTML = '<h6 style="font-size:11px;background-color:lightblue;padding:0.3rem ; width:fit-content"><b>Chat-Bot</b></h6>'
                         p.innerText = rData.message;
                         p.style.marginRight = 'auto';
                         p.style.marginLeft = '0'
-                        p.style.textAlign = 'center';
-                        p.style.padding = '8px 12px';
-                        p.style.border = '2px solid black';
+                        // p.style.textAlign = 'center';
+                        div.style.padding = '8px 12px';
+                        div.style.border = '2px solid black';
                         p.style.marginBottom = '7px';
-                        p.style.width = 'fit-content'
-                        p.style.maxWidth = '60%'; // Set maximum width to 60% of its container
+                        div.style.width = 'fit-content'
+                        div.style.maxWidth = '60%'; // Set maximum width to 60% of its container
                         p.style.wordWrap = 'break-word';
-                        main_chats.appendChild(p)
+                        main_chats.appendChild(div)
                         scrollToBottom()
                     }).catch((er) => {
                         alert(er.message)
