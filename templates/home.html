@@ -199,8 +199,8 @@
                     main_chats.appendChild(div);
                     scrollToBottom()
 
-                     await fetch('https://django-chatbot2-f4ld.onrender.com', {
-                 //await fetch('http://127.0.0.1:8000', {
+                    await fetch('https://django-chatbot2-f4ld.onrender.com', {
+                        // await fetch('http://127.0.0.1:8000', {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'X-CSRFToken': csrfToken2
@@ -211,14 +211,17 @@
                             'message': inputData
                         })
                     }).then((data) => data.json()).then((rData) => {
-                        console.log(rData.message)
+
+                        console.log(rData[0].message)
+                        console.log(rData[0])
                         const p = document.createElement('p');
                         const p2 = document.createElement('p')
                         const div = document.createElement('div')
                         div.appendChild(p)
                         div.appendChild(p2)
                         p2.innerHTML = '<h6 style="font-size:11px;background-color:lightblue;padding:0.3rem ; width:fit-content"><b>Chat-Bot</b></h6>'
-                        p.innerText = rData.message;
+                        // p.innerHTML = rData.message + "For Source Code <a href='" + rData.url + "'>Click here</a>";
+                        p.innerHTML = `${rData[0].message} For Source code <u><a href='${rData[0].url}'>Click here.</a></u>`
                         p.style.marginRight = 'auto';
                         p.style.marginLeft = '0'
                         // p.style.textAlign = 'center';
