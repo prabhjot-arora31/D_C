@@ -16,7 +16,7 @@ def chat(request):
         elif request.method == 'GET':
          return render(request,'home.html')
         else:
-         print('Only POST method is allowed')
+         print('Only POST and GET method is allowed')
          return JsonResponse({'message':'error'})
 def contact(request):
     return render(request,'contact.html')
