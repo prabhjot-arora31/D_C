@@ -6,9 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .mecl_image {
+            transition: .2s ease-in-out;
+        }
+
+        .mecl_image:hover {
+            transform: scale(1.013);
+        }
+
+        .services {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .services .box {
+            width: 250px;
+            height: 250px;
+            /* background-color: black; */
+            border: 2px solid black;
+            padding: 10px;
+            border-radius: 10px;
+            transition: .3s ease-in-out;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .services .box h4 {
+            font-weight: bold;
+        }
+
+        .services .box:hover {
+            background-color: #95453A;
+        }
+
+        .box:hover h4 {
+            color: white;
+        }
+    </style>
 </head>
 
-<body style="position: relative;">
+<body style="">
     <header class="text-gray-600 body-font">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
@@ -24,12 +68,19 @@
                 <a href="/" class="mr-5 hover:text-gray-900">Home</a>
                 <a href="/contact/" class="mr-5 hover:text-gray-900">Contact</a>
             </nav>
+            <img src="{{MEDIA_URL}}images/s7.png" style="width: 270px;" alt="">
         </div>
     </header>
     <section class="text-gray-600 body-font">
-        <div class="container px-5 py-24 mx-auto">
+        <div class="container px-5 py-3 mx-auto">
             <div class="flex flex-col text-center w-full mb-20">
-                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Welcome To MECL</h1>
+                <h1 style="font-size: 35px;" class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                    Welcome To MECL</h1>
+                <div style="margin-bottom: 20px;">
+                    <h1 style="font-weight: bold; font-size: 22px;">Provides <span id="auto_change">Geological</span>
+                        Services </h4>
+                </div>
+                <img class="mecl_image" src="{{MEDIA_URL}}images/s1.png" style="margin-bottom: 20px;" alt="">
                 <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
                     Mineral Exploration and Consultancy Limited (MECL) (formerly Mineral Exploration Corporation
                     Limited) was set up as an organization under the administrative control of the Ministry of Mines,
@@ -69,17 +120,185 @@
                 </div>
             </div>
         </div>
+        <div style="margin-top: 30px;">
+            <h3 style="text-align: center; font-weight: bold;">MECL SERVICES</h3>
+            <div class="services">
+                <div class="box">
+                    <img src="{{MEDIA_URL}}images/s2.png" alt="">
+                    <h4>Geological Services</h4>
+                </div>
+                <div class="box">
+                    <img src="{{MEDIA_URL}}images/s3.png" alt="">
+                    <!-- <h4>Geological Services</h4> -->
+                    <h4>Mineral Exploration</h4>
+                </div>
+                <div class="box">
+                    <img src="{{MEDIA_URL}}images/s4.png" alt="">
+                    <h4>Survey</h4>
+                </div>
+                <div class="box">
+                    <img src="{{MEDIA_URL}}images/s5.png" alt="">
+                    <h4>Drilling</h4>
+                </div>
+                <div class="box">
+                    <img src="{{MEDIA_URL}}images/s6.png" alt="">
+                    <h4>Mining</h4>
+                </div>
+
+            </div>
+        </div>
     </section>
+
+    <!-- footer section -->
+    <footer style="position: relative;" class="text-gray-600 body-font">
+        <div
+            class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+            <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <img style="width: 60px;"
+                        src="data:image/jpeg;base64,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"
+                        alt="">
+                    <span class="ml-3 text-xl">MECL</span>
+                </a>
+                <p class="mt-2 text-sm text-gray-500"><b>
+                        Main Business Office:-
+                    </b>
+                    Dr. Babasaheb Ambedkar Bhawan,
+                    Seminary Hills, Nagpur- 440 006
+                    Maharashtra, India.
+                    <b>
+                        Call:
+                    </b>
+                    0091-712-2510310, 2511833 <br />
+                    <b>
+                        e-mail :
+                    </b>
+                    headbd[at]mecl[dot]gov[dot]in
+                    <b>
+                        CIN :
+                    </b>
+                    U13100MH1972GOI016078
+
+                    <b>
+                        Working time:
+                    </b>
+                    Working: 9.30 AM TO 5.30 PM
+                    <br />
+                    <b>
+                        Non-Executive:
+                    </b>
+                    9.30 AM TO 5.30 PM
+                    <b>
+                        Public Dealing Hours:
+                    </b>
+                    9.30 AM TO 5.30 PM
+                </p>
+            </div>
+            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Useful Links</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/">Front Page</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Personal Policy</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Legal Policy</a>
+                        </li>
+                        <li>
+                            <!-- <a class="text-gray-600 hover:text-gray-800">Fourth Link</a> -->
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Useful Links</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="/contact/">Contact Us</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Other</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Suggestions</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                        </li>
+                    </nav>
+                </div>
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Useful Links</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800" href="">Rules and Regulations</a>
+                        </li>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-100">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <p class="text-gray-500 text-sm text-center sm:text-left">© 2024 MECL
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            class="w-5 h-5" viewBox="0 0 24 24">
+                            <path
+                                d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none"
+                                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                            </path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+    <!-- footer section ends here -->
+    <!-- chat section -->
     <div class="chat-main"
-        style="margin: 0 auto ;  width: 85%; position: sticky; right:  50px; bottom: 35px; display: flex; justify-content: flex-end; ">
+        style="margin: 0 auto ;  width: 85%; position: fixed; bottom: 30px ;right:  50px; display: flex; justify-content: flex-end; ">
         <div class="chat-logo"
-            
-            style="width: 75px; border-radius: 50% ; height: 68px; cursor: pointer; display: flex; justify-content: center; background-color: #D2B48C;">
+            style=" position: absolute ; bottom: 30px; width: 75px; border-radius: 50% ; height: 68px; cursor: pointer; display: flex; justify-content: center; border: 2px solid black;">
             <img style=" border-radius: 50% ;"
                 src="https://logowik.com/content/uploads/images/chat3893.logowik.com.webp" alt="">
         </div>
     </div>
+    <!-- chat section ends here -->
     <script>
+        const auto_change = document.getElementById('auto_change')
+        auto_change.style.color = '#95453A'
+        auto_change.style.transition = '.3s ease-in-out'
+        const words = ['Geological', 'Mineral Exploration', 'Drilling', 'Mining'];
+        var count = 0;
+        setInterval(() => {
+            count++;
+            auto_change.innerText = words[count % words.length]
+        }, 2000)
         document.addEventListener('DOMContentLoaded', function () {
             const chat_logo = document.querySelector('.chat-logo')
             const chat_main = document.querySelector('.chat-main')
@@ -93,13 +312,12 @@
                 chat_box.style.height = '530px';
                 chat_box.style.border = '2px solid black'
                 chat_box.style.backgroundColor = 'white'
-                chat_box.style.position = 'relative';
+                chat_box.style.position = 'absolute';
+                chat_box.style.bottom = '10px'
                 const cross = document.createElement('h2');
                 cross.innerHTML = 'X';
                 cross.style.position = 'absolute'
                 cross.style.right = 0
-                //cross.style.top = '-7px';
-               // cross.style.borderRadius = '50%';
                 cross.style.padding = '0.6rem 0.8rem'
                 cross.style.cursor = 'pointer'
                 cross.style.backgroundColor = 'black';
@@ -202,8 +420,8 @@
                     main_chats.appendChild(div);
                     scrollToBottom()
 
-                    await fetch('https://django-chatbot2-f4ld.onrender.com', {
-                        // await fetch('http://127.0.0.1:8000', {
+                    // await fetch('https://django-chatbot2-f4ld.onrender.com', {
+                    await fetch('http://127.0.0.1:8000', {
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded',
                             'X-CSRFToken': csrfToken2
