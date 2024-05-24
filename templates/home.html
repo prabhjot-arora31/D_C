@@ -22,16 +22,20 @@
         }
 
         table {
-            margin: 0 auto;
-            border-collapse: collapse;
+            /* margin: 0 auto; */
+            /* border-collapse: collapse; */
             width: 50%;
         }
 
         th,
         td {
-            border: 1px solid black;
+            /* border-right: 1px solid black; */
             padding: 8px;
             text-align: center;
+        }
+
+        tr:nth-child(2n) {
+            background-color: aqua;
         }
 
         th {
@@ -109,7 +113,8 @@
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-3 mx-auto">
             <div class="flex flex-col text-center w-full mb-20">
-                <h1 style="font-size: 35px;" class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+                <h1 style="font-size: 35px; text-shadow:6px 6px 12px brown; "
+                    class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
                     Welcome To MECL</h1>
                 <div style="margin-bottom: 20px;">
                     <h1 style="font-weight: bold; font-size: 22px;">Provides <span id="auto_change">Geological</span>
@@ -233,13 +238,16 @@
                     </h2>
                     <nav class="list-none mb-10">
                         <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800" href="/">Front Page</a>
+                            <a style="color: white;" class="text-gray-600 hover:text-gray-800 hover:underline"
+                                href="/">Front Page</a>
                         </li>
                         <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800">Personal Policy</a>
+                            <a style="color: white;" class="text-gray-600 hover:text-gray-800 hover:underline">Personal
+                                Policy</a>
                         </li>
                         <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800">Legal Policy</a>
+                            <a style="color: white;" class="text-gray-600 hover:text-gray-800 hover:underline">Legal
+                                Policy</a>
                         </li>
                         <li>
                             <!-- <a class="text-gray-600 hover:text-gray-800">Fourth Link</a> -->
@@ -251,17 +259,16 @@
                     </h2>
                     <nav class="list-none mb-10">
                         <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800" href="/contact/">Contact
+                            <a style="color: white;" class="text-gray-600 hover:text-gray-800 hover:underline"
+                                href="/contact/">Contact
                                 Us</a>
                         </li>
                         <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800">Other</a>
+                            <a style="color: white;" class="text-gray-600 hover:text-gray-800 hover:underline">Other</a>
                         </li>
                         <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800">Suggestions</a>
-                        </li>
-                        <li>
-                            <a style="color: white;" class="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                            <a style="color: white;"
+                                class="text-gray-600 hover:text-gray-800 hover:underline">Suggestions</a>
                         </li>
                     </nav>
                 </div>
@@ -270,7 +277,8 @@
                     </h2>
                     <nav class="list-none mb-10">
                         <li>
-                            <a class="text-gray-600 hover:text-gray-800" style="color: white;" href="">Rules and
+                            <a class="text-gray-600 hover:text-gray-800 hover:underline" style="color: white;"
+                                href="">Rules and
                                 Regulations</a>
                         </li>
                     </nav>
@@ -577,15 +585,15 @@ Coal production escalated from 70 million tons to 400 million tons, and equivale
 
                     // await fetch('https://django-chatbot2-f4ld.onrender.com', {
                     await fetch('http://127.0.0.1:8000', {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'X-CSRFToken': csrfToken2
-                        },
+                        // headers: {
+                        //     'Content-Type': 'application/x-www-form-urlencoded',
+                        //     'X-CSRFToken': csrfToken2
+                        // },
                         method: 'POST',
-                        body: new URLSearchParams({
-                            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                            'message': inputData
-                        })
+                        // body: new URLSearchParams({
+                        //     'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        //     'message': inputData
+                        // })
                     }).then((data) => data.json()).then((rData) => {
 
                         console.log(rData[0].message)
